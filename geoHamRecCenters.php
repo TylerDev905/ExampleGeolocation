@@ -5,7 +5,6 @@ if(!isset($_GET['City'])){
 }
 ?>
 <!doctype html>
-<!-- I William Taylor-Holubeshen, 000305063 certify that this material is my original work. No other person's work has been used without due acknowledgement. I have not made my work available to anyone else. -->
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
@@ -131,7 +130,7 @@ if(!isset($_GET['City'])){
 					</tbody>
 				</table>
 				<div id="authorWell" class="alert alert-info">
-					<h3>Author: William Taylor-Holubeshen</h3>
+					<h3>Author: Tyler H</h3>
 					<h4>Mohawk College</h4>
 					<h5><strong>Useage:</strong></h5>
 					<blockquote>
