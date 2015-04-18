@@ -1,0 +1,147 @@
+<!doctype html>
+<!-- I William Taylor-Holubeshen, 000305063 certify that this material is my original work. No other person's work has been used without due acknowledgement. I have not made my work available to anyone else. -->
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
+<!--[if gt IE 8]><!--> 
+
+<html class="no-js" lang=""> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="stylesheet" href="css/normalize.min.css">
+        <link rel="stylesheet" href="css/main.css">
+		<link rel="stylesheet" href="css/bootstrap.min.css">
+		<link rel="stylesheet" href="css/bootstrap-theme.min.css">
+		<style>
+		#canvas {
+			width:300px; 
+			height:300px; 
+			margin:0 auto;
+		}
+		th{
+			text-align:center;
+		}
+		#StatusMsg2{
+			text-align:center;
+		}
+		.header-container{
+			background-color:#DDD;
+			color:white;
+		}
+		.footer-container{
+			background-color:#DDD;
+			color:white;
+		}
+		</style>
+        <script src="js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
+		<script src="js/vendor/jquery-1.11.2.min.js"></script>
+		<script src="js/vendor/bootstrap.min.js"></script>
+		<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA6qKD1rH-vLaa-ijUQNY77jjHiMI7C1Z4"></script>
+		<script src="js/gmaps.js"></script>
+		
+    </head>
+    <body>
+        <!--[if lt IE 8]>
+            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+
+        <div class="header-container">
+            <header class="wrapper clearfix">
+                <h3 class="title">Comp10133: Lab 3 Geolocation Test and Google Maps</h3>
+            </header>
+        </div>
+
+        <div class="main-container">
+            <div class="main wrapper clearfix">
+				
+				
+				<div id="StatusMsg"></div>
+				
+				<table class="table table-striped table-bordered">
+					<thead>
+						<tr>
+							<th>Client Location</th>
+						<tr>
+					</thead>
+					<tbody>
+					<tr>
+						<td><div id="canvas"></div></td>
+					</tr>
+					</tbody>
+				</table>
+				
+				<div id="StatusMsg2"></div>
+				
+				
+            </div> <!-- #main -->
+        </div> <!-- #main-container -->
+
+        <div class="footer-container">
+            <footer class="wrapper">
+                <h3>Comp10133: Lab 3 Geolocation Test and Google Maps</h3>
+            </footer>
+        </div>
+		
+        <script src="js/main.js"></script>
+		<script>
+		
+		
+		//is geolocation supported?
+		if(Modernizr.geolocation){
+			$("#StatusMsg").html('<div class="alert alert-success" role="alert"><strong>Geolocation Success!</strong> Modernizr states that geolocation is supported.</div>');
+		}
+		else{
+			$("#StatusMsg").html('<div class="alert alert-danger" role="alert"><strong>Geolocation Failed!</strong> Modernizr states that geolocation is not supported.</div>');
+		}
+		
+		//intilize google map
+		function initialize(coords) {
+			
+			var mapOptions = {
+				center: coords,
+				zoom: 15
+			};
+			var map = new google.maps.Map(document.getElementById('canvas'), mapOptions);
+			var marker = new google.maps.Marker({
+				position: coords,
+				map: map,
+				title:"Mohawk College!"
+			});
+		
+		}
+		
+
+		
+		//get the current position
+		navigator.geolocation.getCurrentPosition(success,failure);
+	
+		//on success display the position of the client
+		function success(e){
+			$("#StatusMsg2").html('<div class="alert alert-info"><strong>GPS puts you at.</strong></br>Latitude: '+e.coords.latitude+'</br>Longitude: '+e.coords.longitude+'</div>')
+			var coords =  new google.maps.LatLng(e.coords.latitude,e.coords.longitude);
+			initialize(coords)
+		}
+		
+		//on failed display the default map with the default coordinates
+		function failure(e){
+			var coords =  new google.maps.LatLng(43.23869,-79.888058);
+			initialize(coords);
+			$("#StatusMsg2").html('<div class="alert alert-info"><strong>GPS puts you at.</strong></br>Latitude: 43.23869</br>Longitude: -79.888058</div>')
+			switch(e.code){
+				case 1: $("#StatusMsg").append('<div class="alert alert-warning" role="alert"><strong>Geolocation Alert!</strong> permission was denied. The default map will be used!</div>');
+				break;
+				case 2: $("#StatusMsg").append('<div class="alert alert-info" role="alert"><strong>Geolocation Alert!</strong> the position is unavailable. The default map will be used!</div>');
+				break;
+				case 3: $("#StatusMsg").append('<div class="alert alert-danger" role="alert"><strong>Geolocation Alert!</strong> geolocation has timed out. The default map will be used!<div>');
+				break;
+			}
+		}
+		
+		</script>
+    </body>
+</html>
