@@ -1,6 +1,4 @@
 <?php
-// I William Taylor-Holubeshen, 000305063 certify that this material is my original work. No other person's work has been used without due acknowledgement. I have not made my work available to anyone else.
-	
 	//opens the scv file
 	$file = fopen('hamRecCenter.csv','r');
 	$flag = true;
