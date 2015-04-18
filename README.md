@@ -10,10 +10,10 @@ Demonstrates the use of
 3. Google Maps Api
 ```
 <a href="http://imgur.com/CynKNg6"><img src="http://i.imgur.com/CynKNg6.png" title="source: imgur.com" /></a>
-This is a lab from school.
 
 
 #### Example Reading csv data and displaying it on a google map
+This is a lab from school.
 
 Demonstrates the use of
 ```
